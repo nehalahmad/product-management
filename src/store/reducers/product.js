@@ -137,11 +137,6 @@ const getProducts = (state, action) => {
     );
   }
 
-  filteredProducts = filteredProducts.slice(
-    (action.pageNumber - 1) * action.limit,
-    action.limit * action.pageNumber
-  );
-
   return updateObject(state, {
     filteredProducts,
   });

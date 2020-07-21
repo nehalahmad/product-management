@@ -61,7 +61,8 @@ class ProductList extends Component {
       let items = [];
       for (
         let number = 1;
-        number <= Math.ceil(this.props.products.length / this.state.limit);
+        number <=
+        Math.ceil(this.props.filteredProducts.length / this.state.limit);
         number++
       ) {
         items.push(
@@ -77,15 +78,20 @@ class ProductList extends Component {
 
       paginationBasic = <Pagination>{items}</Pagination>;
 
-      tableBody = this.props.filteredProducts.map((product, index) => (
-        <tr key={product.id}>
-          <td>{product.id}</td>
-          <td>{product.name}</td>
-          <td>{product.category}</td>
-          <td>{product.mfgDate}</td>
-          <td>{product.type}</td>
-        </tr>
-      ));
+      tableBody = this.props.filteredProducts
+        .slice(
+          (this.state.pageNumber - 1) * this.state.limit,
+          this.state.limit * this.state.pageNumber
+        )
+        .map((product, index) => (
+          <tr key={product.id}>
+            <td>{product.id}</td>
+            <td>{product.name}</td>
+            <td>{product.category}</td>
+            <td>{product.mfgDate}</td>
+            <td>{product.type}</td>
+          </tr>
+        ));
     }
 
     return (
@@ -133,7 +139,6 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.product.products,
   filteredProducts: state.product.filteredProducts,
   limit: state.product.limit,
   offset: state.product.offset,
