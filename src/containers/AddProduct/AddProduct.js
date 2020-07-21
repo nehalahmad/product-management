@@ -43,6 +43,8 @@ class AddProduct extends Component {
     };
 
     this.props.onAddProduct(product);
+
+    this.props.history.goBack();
   }
 
   nameChangeHandler = (e) => {
@@ -65,7 +67,7 @@ class AddProduct extends Component {
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Category</Form.Label>
-          <Form.Control as="select" multiple>
+          <Form.Control as="select" multiple ref={(ref) => (this.catRef = ref)}>
             <option value="cat1">Category 1</option>
             <option value="cat2">Category 2</option>
             <option value="cat3">Category 3</option>
@@ -73,11 +75,11 @@ class AddProduct extends Component {
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Mfg Date</Form.Label>
-          <Form.Control type="text" />
+          <Form.Control type="text" ref={(ref) => (this.mfgDateRef = ref)} />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlInput4">
           <Form.Label>Product Type</Form.Label>
-          <Form.Control as="select">
+          <Form.Control as="select" ref={(ref) => (this.typeRef = ref)}>
             <option value="type1">Type 1</option>
             <option value="type2">Type 2</option>
             <option value="type3">Type 3</option>

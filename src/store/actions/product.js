@@ -5,20 +5,9 @@ export const addProduct = (product) => ({
   product,
 });
 
-export const addProductStart = () => ({
-  type: actionTypes.ADD_PRODUCT_START,
-});
-
-export const addProductSuccess = (product) => ({
-  type: actionTypes.ADD_PRODUCT_SUCCESS,
-  product,
-});
-
-export const addProductFail = (product) => ({
-  type: actionTypes.ADD_PRODUCT_FAIL,
-  product,
-});
-
-export const getProducts = () => ({
+export const getProducts = (limit, pageNumber, searchKeyword) => ({
   type: actionTypes.GET_PRODUCTS,
+  limit,
+  pageNumber,
+  searchKeyword,
 });
