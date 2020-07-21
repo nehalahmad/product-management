@@ -8,11 +8,11 @@ import WithErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 class AddProduct extends Component {
   state = {
-    name: "",
-    category: "",
-    mfgDate: "",
-    type: "",
-    specifications: [],
+    specifications: {
+      length: [{ sqft: {}, meter: "", centimeter: "" }],
+      weight: [{ kg: "", lbs: "", gram: "" }],
+      document: [{ pdf: "", word: "", image: "" }],
+    },
   };
 
   constructor(props) {

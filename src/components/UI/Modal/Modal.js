@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Modal.css";
 
 import Auxilliary from "../../../hoc/Auxilliary/Auxilliary";
-import Backdrop from "../../UI/Backdrop/Backdrop";
+import Backdrop from "../Backdrop/Backdrop";
 
 class Modal extends Component {
   shouldComponentUpdate(nextProps, nextState) {
