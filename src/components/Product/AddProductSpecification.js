@@ -70,6 +70,8 @@ class AddProductSpecification extends Component {
       [spec]: newSpecArr,
     });
     this.setState({ specifications: newSpecifications });
+
+    this.props.onUpdateSpecification(this.state.specifications);
   }
 
   onDeleteClickHandler(spec, pos) {
@@ -80,6 +82,8 @@ class AddProductSpecification extends Component {
       [spec]: specs,
     });
     this.setState({ specifications: newSpecifications });
+
+    this.props.onUpdateSpecification(this.state.specifications);
   }
 
   render() {

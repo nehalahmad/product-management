@@ -5,10 +5,13 @@ import { Row, Col, Form, Button, Alert } from "react-bootstrap";
 import * as actions from "../../store/actions";
 
 import AddProductSpecification from "../../components/Product/AddProductSpecification";
+import { updateObject } from "../../shared/utility";
 
 class AddProduct extends Component {
   constructor(props) {
     super(props);
+
+    this.product = {};
 
     this.nameRef = createRef();
     this.catRef = createRef();
@@ -26,15 +29,14 @@ class AddProduct extends Component {
   submitFormHandler(event) {
     event.preventDefault();
 
-    const product = {
+    this.product = updateObject(this.product, {
       name: this.nameRef.value,
       category: this.catRef.value,
       mfgDate: this.mfgDateRef.value,
       type: this.typeRef.value,
-      specifications: [],
-    };
+    });
 
-    this.props.onAddProduct(product);
+    this.props.onAddProduct(this.product);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -46,6 +48,10 @@ class AddProduct extends Component {
   componentWillUnmount() {
     this.props.onResetStore();
   }
+
+  updateSpecificationHandler = (specifications) => {
+    this.product["specifications"] = specifications;
+  };
 
   render() {
     return (
@@ -101,7 +107,9 @@ class AddProduct extends Component {
             </Form.Control>
           </Col>
         </Form.Group>
-        <AddProductSpecification />
+        <AddProductSpecification
+          onUpdateSpecification={this.updateSpecificationHandler}
+        />
         <Button variant="secondary" onClick={this.cancelClickHandler}>
           Cancel
         </Button>
