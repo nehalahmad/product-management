@@ -154,6 +154,8 @@ const reducer = (state = initialState, action) => {
       return addProduct(state, action);
     case actionTypes.GET_PRODUCTS:
       return getProducts(state, action);
+    case actionTypes.RESET_STORE:
+      return updateObject(state, { error: null, loading: false });
     default:
       return state;
   }

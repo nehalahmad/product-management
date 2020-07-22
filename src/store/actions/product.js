@@ -11,3 +11,7 @@ export const getProducts = (limit, pageNumber, searchKeyword) => ({
   pageNumber,
   searchKeyword,
 });
+
+export const resetStore = () => ({
+  type: actionTypes.RESET_STORE,
+});

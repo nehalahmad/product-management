@@ -1,1 +1,1 @@
-export { getProducts, addProduct } from "./product";
+export { getProducts, addProduct, resetStore } from "./product";

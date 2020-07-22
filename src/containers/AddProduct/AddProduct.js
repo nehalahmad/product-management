@@ -4,25 +4,9 @@ import { Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 import * as actions from "../../store/actions";
 
-class AddProduct extends Component {
-  state = {
-    specifications: {
-      length: [
-        { id: 1, measurementVar: "", type: "", value: "" },
-        { id: 2, measurementVar: "", type: "", value: "" },
-      ],
-      weight: [
-        { id: 1, measurementVar: "", type: "", value: "" },
-        { id: 2, measurementVar: "", type: "", value: "" },
-      ],
-      document: [
-        { id: 1, measurementVar: "", type: "", value: "" },
-        { id: 2, measurementVar: "", type: "", value: "" },
-      ],
-    },
-    specificationRow: "",
-  };
+import AddProductSpecification from "../../components/Product/AddProductSpecification";
 
+class AddProduct extends Component {
   constructor(props) {
     super(props);
 
@@ -33,9 +17,6 @@ class AddProduct extends Component {
 
     this.cancelClickHandler = this.cancelClickHandler.bind(this);
     this.submitFormHandler = this.submitFormHandler.bind(this);
-    this.changeSpecificationHandler = this.changeSpecificationHandler.bind(
-      this
-    );
   }
 
   cancelClickHandler() {
@@ -54,12 +35,16 @@ class AddProduct extends Component {
     };
 
     this.props.onAddProduct(product);
-
-    this.props.history.goBack();
   }
 
-  changeSpecificationHandler(e) {
-    this.setState({});
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!this.props.error) {
+      this.props.history.goBack();
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.onResetStore();
   }
 
   render() {
@@ -116,6 +101,7 @@ class AddProduct extends Component {
             </Form.Control>
           </Col>
         </Form.Group>
+        <AddProductSpecification />
         <Button variant="secondary" onClick={this.cancelClickHandler}>
           Cancel
         </Button>
@@ -135,6 +121,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onAddProduct: (product) => dispatch(actions.addProduct(product)),
+  onResetStore: () => dispatch(actions.resetStore()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);
