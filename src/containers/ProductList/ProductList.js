@@ -4,8 +4,6 @@ import { Pagination, Row, Col, Button, Table, Form } from "react-bootstrap";
 
 import * as actions from "../../store/actions";
 
-import WithErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-
 class ProductList extends Component {
   state = { pageNumber: 1, limit: 10 };
 
@@ -149,7 +147,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.getProducts(limit, pageNumber, searchKeyword)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WithErrorHandler(ProductList));
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

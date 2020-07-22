@@ -114,8 +114,14 @@ const initialState = {
 };
 
 const addProduct = (state, action) => {
-  let lastProductId = 0;
+  let prdouctAlreadyExists = !!state.products.find(
+    (product) => product.name === action.product.name
+  );
+  if (prdouctAlreadyExists) {
+    return updateObject(state, { error: "Product already exists!" });
+  }
 
+  let lastProductId = 0;
   if (state.products && state.products.length) {
     lastProductId = state.products[state.products.length - 1].id;
   }
