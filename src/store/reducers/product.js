@@ -138,8 +138,12 @@ const getProducts = (state, action) => {
   let filteredProducts = JSON.parse(JSON.stringify(state.products));
 
   if (action.searchKeyword.length) {
-    filteredProducts = state.products.filter((product) =>
-      product.name.includes(action.searchKeyword)
+    filteredProducts = state.products.filter(
+      (product) =>
+        product.name.includes(action.searchKeyword) ||
+        product.category.includes(action.searchKeyword) ||
+        product.id === action.searchKeyword ||
+        product.type.includes(action.searchKeyword)
     );
   }
 
